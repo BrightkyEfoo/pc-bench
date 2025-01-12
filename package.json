@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "esbuild": "^0.24.2",
     "systeminformation": "^5.25.10"
   },
   "devDependencies": {
