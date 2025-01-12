@@ -313,7 +313,9 @@ class SystemTester {
    * @returns {Promise<number>} La performance du processeur en multithread (unité arbitraire)
    */
   static async testMultiThreadPerformance(): Promise<number> {
-    const numCores = 4; // Utiliser 4 cœurs pour le test
+    const cpu = await si.cpu();
+
+    const numCores = cpu.cores || 1; // Utiliser 4 cœurs pour le test
     const workerPromises: Promise<number>[] = [];
 
     // Création d'un tableau de promises de workers

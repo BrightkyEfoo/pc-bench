@@ -18,7 +18,7 @@ parentPort.on("message", (data) => {
 function performTask(input) {
   // Simule une opération coûteuse ou intensive
   let sum = 0;
-  for (let i = 0; i < 1e7; i++) {
+  for (let i = 0; i < 1e10; i++) {
     sum += i + input;
   }
   return sum;
