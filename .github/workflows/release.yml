@@ -55,6 +55,8 @@ jobs:
       # Créer un tag GitHub correspondant à la version
       - name: Create GitHub Tag
         run: |
+          git config --global user.email "brightefoo@gmail.com"
+          git config --global user.name "Bright Efoo"
           VERSION=$(node -p "require('./package.json').version")
           git tag -a "v$VERSION" -m "Release v$VERSION"
           git push origin --tags
