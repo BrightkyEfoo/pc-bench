@@ -48,9 +48,12 @@ jobs:
         id: version-bump
         run: |
           npm version patch --no-git-tag-version
+          VERSION=$(node -p "require('./package.json').version")
+          echo "Version incrémentée : $VERSION"
           git add package.json
-          git commit -m "chore: bump version to $(node -p \"require('./package.json').version\")"
+          git commit -m "chore: bump version to $VERSION"
           git push origin main
+        shell: bash
 
       # Créer un tag GitHub correspondant à la version
       - name: Create GitHub Tag
