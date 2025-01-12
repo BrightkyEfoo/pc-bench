@@ -3,6 +3,7 @@
     "outDir": "./dist",
     "declaration": true,
     "declarationDir": "./dist",
+    "allowJs": true,
     "strict": true,
     "module": "CommonJS",
     "target": "ES2016",

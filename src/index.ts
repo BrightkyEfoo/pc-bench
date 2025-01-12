@@ -1,5 +1,5 @@
 import * as si from "systeminformation";
-import { Worker } from "worker_threads";
+import { Worker } from "node:worker_threads";
 import testAll from './test-all'
 
 /**
@@ -275,9 +275,9 @@ class SystemTester {
     const cpuCores = await si.cpuTemperature();
     for (let i = 0; i < cpuCores.max; i++) {
       cpuInfo.coresInfo.push({
-        // logicalCores: cpuCores.t.core,
+        logicalCores: cpuCores.cores.length,
         frequency: cpu.speed,
-        // load: cpuCores[i].temperature,
+        load: cpuCores.socket?.[i],
       });
     }
 
