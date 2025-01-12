@@ -1,6 +1,7 @@
 name: Publish Package
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -10,47 +11,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Vérifier le code
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      # Vérifier le code
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    # Configurer Node.js
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
+      # Configurer Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
 
-    # Installer les dépendances
-    - name: Install Dependencies
-      run: npm install
+      # Installer les dépendances
+      - name: Install Dependencies
+        run: npm install
 
-    # S'assurer que la version est incrémentée
-    - name: Ensure version bump
-      id: version-check
-      run: |
-        CURRENT_VERSION=$(node -p "require('./package.json').version")
-        echo "Current version: $CURRENT_VERSION"
-        git diff --exit-code package.json || npm version patch
-      shell: bash
+      # S'assurer que la version est incrémentée
+      - name: Ensure version bump
+        id: version-check
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+          git diff --exit-code package.json || npm version patch
+        shell: bash
 
-    # Construire le package
-    - name: Build Package
-      run: npm run build
+      # Construire le package
+      - name: Build Package
+        run: npm run build
 
-    # Minifier le package
-    - name: Minify Package
-      run: npm run minify
+      # Minifier le package
+      - name: Minify Package
+        run: npm run minify
 
-    # Publier sur npm
-    - name: Publish to npm
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Publier sur npm
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    # Créer un tag GitHub correspondant à la version
-    - name: Create GitHub Tag
-      run: |
-        VERSION=$(node -p "require('./package.json').version")
-        git tag -a "v$VERSION" -m "Release v$VERSION"
-        git push origin --tags
+      # Créer un tag GitHub correspondant à la version
+      - name: Create GitHub Tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag -a "v$VERSION" -m "Release v$VERSION"
+          git push origin --tags
