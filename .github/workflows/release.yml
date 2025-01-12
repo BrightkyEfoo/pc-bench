@@ -37,6 +37,9 @@ jobs:
       - name: Minify Package
         run: npm run minify
 
+      - name: List files to publish
+        run: npm pack --dry-run
+
       # Publier sur npm
       - name: Publish to npm
         run: npm publish --provenance --access public
