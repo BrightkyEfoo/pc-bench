@@ -47,6 +47,8 @@ jobs:
       - name: Increment version
         id: version-bump
         run: |
+          git config --global user.email "brightefoo@gmail.com"
+          git config --global user.name "bright efoo"
           npm version patch --no-git-tag-version
           VERSION=$(node -p "require('./package.json').version")
           echo "Version incrémentée : $VERSION"
