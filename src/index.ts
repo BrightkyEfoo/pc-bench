@@ -1,4 +1,4 @@
-import si from "systeminformation";
+import * as si from "systeminformation";
 import { Worker, isMainThread, parentPort } from "worker_threads";
 
 /**
@@ -56,7 +56,7 @@ interface CpuCoreInfo {
    * Le nombre de cœurs logiques.
    * @type {number}
    */
-  logicalCores: number;
+  logicalCores?: number;
 
   /**
    * La fréquence du cœur en GHz.
@@ -68,7 +68,7 @@ interface CpuCoreInfo {
    * La charge du cœur en pourcentage.
    * @type {number}
    */
-  load: number;
+  load?: number;
 }
 
 /**
@@ -274,20 +274,20 @@ class SystemTester {
     const cpuCores = await si.cpuTemperature();
     for (let i = 0; i < cpuCores.max; i++) {
       cpuInfo.coresInfo.push({
-        logicalCores: cpuCores[i].core,
+        // logicalCores: cpuCores.t.core,
         frequency: cpu.speed,
-        load: cpuCores[i].temperature,
+        // load: cpuCores[i].temperature,
       });
     }
 
     return {
       cpu: cpuInfo,
       gpu: {
-        manufacturer: gpu[0].vendor,
-        model: gpu[0].model,
-        memoryTotal: gpu[0].memoryTotal / 1024, // Convertir MB en Go
-        memoryUsed: gpu[0].memoryUsed / 1024,
-        memoryFree: gpu[0].memoryFree / 1024,
+        manufacturer: gpu.controllers[0].vendor,
+        model: gpu.controllers[0].model,
+        memoryTotal: gpu.controllers[0].memoryTotal || 0 / 1024, // Convertir MB en Go
+        memoryUsed: gpu.controllers[0].memoryUsed || 0 / 1024,
+        memoryFree: gpu.controllers[0].memoryFree || 0 / 1024,
       },
       ram: {
         total: ram.total / 1024 ** 3, // Convertir bytes en Go
