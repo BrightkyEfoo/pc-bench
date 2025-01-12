@@ -1,6 +1,47 @@
 import { SystemTester, PerformanceTestResult } from "./";
 
-(async () => {
+/**
+ * Exécute une série de tests pour valider les informations système
+ * et effectuer des évaluations de performance matérielle.
+ *
+ * Cette fonction utilise les méthodes fournies par `SystemTester` pour :
+ * - Récupérer les informations système (CPU, GPU, RAM, disque, réseau).
+ * - Vérifier la validité des informations système récupérées.
+ * - Tester la performance multithread du processeur.
+ * - Simuler des tests supplémentaires (vitesse RAM, disque, etc.).
+ *
+ * Les résultats des tests sont affichés dans la console.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} Ne retourne aucune valeur, mais écrit les résultats
+ *                          dans la console ou signale des erreurs si elles surviennent.
+ *
+ * @throws Affiche une erreur dans la console si :
+ * - Les données système récupérées sont invalides.
+ * - Les résultats de performance ne respectent pas les attentes.
+ *
+ * @example
+ * import testAll from './path/to/this/file';
+ *
+ * testAll()
+ *   .then(() => console.log("Tous les tests ont été exécutés."))
+ *   .catch((error) => console.error("Erreur lors de l'exécution des tests :", error));
+ *
+ * @dependencies
+ * - `SystemTester` : Un module permettant de récupérer les informations système
+ *                    et d'exécuter des tests de performance matérielle.
+ * - `PerformanceTestResult` : Interface décrivant les résultats d'un test de performance.
+ *
+ * @steps
+ * 1. Affiche un message signalant le début des tests.
+ * 2. Récupère les informations système à l'aide de `SystemTester.getSystemInfo`.
+ * 3. Valide les informations récupérées (CPU, GPU, RAM).
+ * 4. Effectue un test de performance multithread avec `SystemTester.testMultiThreadPerformance`.
+ * 5. Simule des tests supplémentaires pour des aspects comme la vitesse RAM ou disque.
+ * 6. Affiche un résumé des résultats dans la console.
+ */
+const testAll = async (): Promise<void> => {
     try {
         console.log("==== Début des tests ====");
 
@@ -68,4 +109,6 @@ import { SystemTester, PerformanceTestResult } from "./";
     } catch (error) {
         console.error("Une erreur s'est produite pendant les tests :", error);
     }
-})();
+}
+
+export default testAll;

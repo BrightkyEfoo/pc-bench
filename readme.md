@@ -165,6 +165,70 @@ All functions accept an optional `logger` parameter to log the progress and resu
 ```typescript
 await testCPU({ logger: console.log });
 ```
+### Updated Usage Description for README (NPM)
+
+Here is the revised version with titles one level lower:
+
+---
+
+### Using `testAll`
+
+The `testAll` function is an asynchronous method designed to run a series of tests that validate system information and evaluate hardware performance. It provides detailed insights about your hardware (CPU, GPU, RAM, disk, and network) and performs multithreaded performance testing on your processor.
+
+#### Features
+
+- **System Information Retrieval and Validation**:
+  - **CPU**: Manufacturer, model, frequency, physical/logical cores.
+  - **GPU**: Manufacturer, model.
+  - **RAM**: Total, used, and free memory.
+  - **Disk**: Total, used, and available space.
+  - **Network**: Interface, speed.
+- **Multithreaded Performance Testing**.
+- **Simulated Performance Tests** for RAM and disk speed.
+- **Comprehensive Results** displayed directly in the console.
+
+#### Example Usage
+
+Here's how to use the `testAll` function in your project:
+
+```typescript
+import testAll from "<your-package-name>";
+
+testAll()
+  .then(() => console.log("All tests have been successfully executed."))
+  .catch((error) => console.error("An error occurred during the tests:", error));
+```
+
+#### Expected Output
+
+After executing the function, you will see a summary of the system information and performance tests directly in the console. For example:
+
+```
+==== Starting Tests ====
+Test: Retrieving system information...
+CPU Information: { manufacturer: 'Intel', brand: 'Core i7', speed: 3.6, cores: 8, physicalCores: 4 }
+GPU Information: { manufacturer: 'NVIDIA', model: 'RTX 3060' }
+RAM Information: { total: 16384, free: 8192, used: 8192 }
+Disk Information: { total: 512000, used: 256000, free: 256000 }
+Network Information: { interface: 'Ethernet', speed: 1000 }
+System information validated.
+Test: Multithreaded CPU performance...
+Multithreaded Performance: 3500
+Multithreaded performance validated.
+Performance test results: {
+  cpuFrequency: 3.6,
+  gpuPerformance: 100,
+  ramSpeed: 3200,
+  diskSpeed: 500,
+  multiThreadPerformance: 3500
+}
+==== Tests Completed Successfully ====
+```
+
+#### Notes of using testAll function
+
+- This function is ideal for developers who want to quickly diagnose their system or evaluate machine performance.
+- The additional tests (RAM speed, disk speed, etc.) use simulated values for demonstration purposes. You can customize these sections to suit your needs.
 
 ---
 
