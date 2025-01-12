@@ -1,0 +1,22 @@
+{
+  "name": "pc-bench",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build && npm run minify",
+    "minify": "esbuild dist/index.js --minify --outfile=dist/index.min.js",
+    "version:bump": "npm version patch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "systeminformation": "^5.25.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}
