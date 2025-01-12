@@ -320,7 +320,7 @@ class SystemTester {
     for (let i = 0; i < numCores; i++) {
       workerPromises.push(
         new Promise<number>((resolve, reject) => {
-          const worker = new Worker("./worker.js"); // Exécuter le code du worker
+          const worker = new Worker("./dist/worker.js"); // Exécuter le code du worker
           worker.on("message", (result) => {
             resolve(result);
             worker.terminate();
