@@ -1,5 +1,6 @@
 import * as si from "systeminformation";
-import { Worker, isMainThread, parentPort } from "worker_threads";
+import { Worker } from "worker_threads";
+import testAll from './test-all'
 
 /**
  * Informations sur le processeur.
@@ -338,4 +339,5 @@ class SystemTester {
   }
 }
 
-export { SystemTester, PerformanceTestResult };
+export { PerformanceTestResult, SystemTester, testAll };
+
